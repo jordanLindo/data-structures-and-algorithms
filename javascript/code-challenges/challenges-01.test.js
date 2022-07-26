@@ -60,11 +60,15 @@ Use `forEach` to build a new array of strings, each string modified by the callb
 ------------------------------------------------------------------------------------------------ */
 
 const greeting = (word) => {
-  // Solution code here...
+  return (word.toUpperCase()+"!")
 };
 
 const speaker = (words, callback) => {
-  // Solution code here...
+  let localArray = [];
+  words.forEach((val, index) => {
+    localArray[index] = callback(val);
+  });
+  return localArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -84,11 +88,14 @@ Return the modified array.
 ------------------------------------------------------------------------------------------------ */
 
 const addValues = (arr, value) => {
-  // Solution code here...
+  arr.push(value);
 };
 
 const addNumbers = (num, arr, times, callback) => {
-  // Solution code here...
+  for (let index = 0; index < times; index++) {
+    callback(arr, num);
+  }
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -110,7 +117,13 @@ This function should use forEach to populate your grocery list based on the stor
 ------------------------------------------------------------------------------------------------ */
 
 const createList = (availableItems) => {
-  // Solution code here...
+  let groceryList = [];
+  availableItems.forEach( (val, index) => {
+    if(val.available){
+      groceryList.push(val.name);
+    }
+  });
+  return groceryList;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -128,7 +141,21 @@ Return the resulting output array.
 ------------------------------------------------------------------------------------------------ */
 
 const fizzbuzz = (arr) => {
-  // Solution code here...
+  let outputArray = [];
+  arr.forEach((val, index) =>{
+    let outVal;
+    if(val % 3 === 0 && val % 5 === 0){
+      outVal = "Fizz Buzz";
+    } else if(val % 3 === 0){
+      outVal = "Fizz";
+    } else if(val % 5 === 0){
+      outVal = "Buzz"
+    } else {
+      outVal = val;
+    }
+    outputArray.push(outVal);
+  });
+  return outputArray;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -182,7 +209,7 @@ describe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   const inputs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
   test('It should print out messages or numbers', () => {
