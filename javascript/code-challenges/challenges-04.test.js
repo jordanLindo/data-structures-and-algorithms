@@ -361,12 +361,7 @@ Sort the meetings in the order that they start. If two meetings start at the sam
 You DO NOT need to use your solution to Challenge 12 in completing Challenge 13.
 ------------------------------------------------------------------------------------------------ */
 
-const sortSchedule = (arr) => arr.sort((val2, val1) => {
-  let result = val1.dayOfWeek === 'Monday' ? val2.dayOfWeek === 'Monday' ? val1.start === val2.start ? val1.end < val2.end ? 1 : -1 : val1.start < val2.start ? 1 : -1 : 1 : val1.dayOfWeek === 'Tuesday' ? val2.dayOfWeek === 'Monday' ? -1 : val2.dayOfWeek === 'Tuesday' ? val1.start === val2.start ? val1.end < val2.end ? 1 : -1 : val1.start < val2.start ? 1 : -1 : 1 : val1.dayOfWeek === 'Wednesday' ? val2.dayOfWeek === 'Monday' ? -1 : val2.dayOfWeek === 'Tuesday' ? -1 : val2.dayOfWeek === 'Wednesday' ? val1.start === val2.start ? val1.end < val2.end ? 1 : -1 : val1.start < val2.start ? 1 : -1 : 1 : val1.dayOfWeek === 'Thursday' ? val2.dayOfWeek === 'Monday' ? -1 : val2.dayOfWeek === 'Tuesday' ? -1 : val2.dayOfWeek === 'Wednesday' ? -1 : val2.dayOfWeek === 'Thursday' ? val1.start === val2.start ? val1.end < val2.end ? 1 : -1 : val1.start < val2.start ? 1 : -1 : 1 : val1.dayOfWeek === 'Friday' ? val2.dayOfWeek === 'Friday' ? val1.start === val2.start ? val1.end < val2.end ? 1 : -1 : val1.start < val2.start ? 1 : 1 : -1: 0;
-
-  return result;
-
-});
+const sortSchedule = (arr) => arr.sort((val2, val1) => val1.dayOfWeek === 'Monday' ? val2.dayOfWeek === 'Monday' ? val1.start === val2.start ? val1.end < val2.end ? 1 : -1 : val1.start < val2.start ? 1 : -1 : 1 : val1.dayOfWeek === 'Tuesday' ? val2.dayOfWeek === 'Monday' ? -1 : val2.dayOfWeek === 'Tuesday' ? val1.start === val2.start ? val1.end < val2.end ? 1 : -1 : val1.start < val2.start ? 1 : -1 : 1 : val1.dayOfWeek === 'Wednesday' ? val2.dayOfWeek === 'Monday' ? -1 : val2.dayOfWeek === 'Tuesday' ? -1 : val2.dayOfWeek === 'Wednesday' ? val1.start === val2.start ? val1.end < val2.end ? 1 : -1 : val1.start < val2.start ? 1 : -1 : 1 : val1.dayOfWeek === 'Thursday' ? val2.dayOfWeek === 'Monday' ? -1 : val2.dayOfWeek === 'Tuesday' ? -1 : val2.dayOfWeek === 'Wednesday' ? -1 : val2.dayOfWeek === 'Thursday' ? val1.start === val2.start ? val1.end < val2.end ? 1 : -1 : val1.start < val2.start ? 1 : -1 : 1 : val1.dayOfWeek === 'Friday' ? val2.dayOfWeek === 'Friday' ? val1.start === val2.start ? val1.end < val2.end ? 1 : -1 : val1.start < val2.start ? 1 : 1 : -1: 0);
 
 
 /*
