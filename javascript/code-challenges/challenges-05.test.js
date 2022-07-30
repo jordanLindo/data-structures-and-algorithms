@@ -27,7 +27,7 @@ Write a function named addValues that, given an array of numbers as input, uses 
 
 const addValues = (arr) => {
   // Solution code here...
-  return arr.reduce((val1, val2) => val1 +val2,0);
+  return arr.reduce((val1, val2) => val1 + val2, 0);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -42,7 +42,7 @@ Write a function named addPurchases that, given an array of objects as input, us
 
 ------------------------------------------------------------------------------------------------ */
 
-const addPurchases = (arr) => arr.reduce((val1,val2) => val1 + val2.purchasePrice , 0);
+const addPurchases = (arr) => arr.reduce((val1, val2) => val1 + val2.purchasePrice, 0);
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -52,7 +52,7 @@ Write a function named countNumberOfElements that, given an array as input, uses
 Note: You may not use the array's built-in length property.
 ------------------------------------------------------------------------------------------------ */
 
-const countNumberOfElements = (arr) => arr.reduce((total,curVal) => total = total+1);
+const countNumberOfElements = (arr) => arr.reduce((total, curVal) => total = total + 1);
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -78,7 +78,8 @@ let starWarsData = [{
   skin_color: 'gold',
   eye_color: 'yellow',
   birth_year: '112BBY',
-  gender: 'n/a'},
+  gender: 'n/a'
+},
 {
   name: 'R2-D2',
   height: '96',
@@ -127,8 +128,8 @@ Note: You must use reduce for this challenge. You may not use the built-in .reve
 const reversedString = (str) => {
   // Solution code here...
   let forResult = str.split('');
-  let result= '';
-  for (let index = forResult.length-1; index >= 0 ; index--) {
+  let result = '';
+  for (let index = forResult.length - 1; index >= 0; index--) {
     result += forResult[index];
   }
   return result;
@@ -185,8 +186,8 @@ const characters = [
 
 const countNumberOfChildren = (arr) => {
   // Solution code here...
-  return arr.reduce((total,val) => {
-    if(val.children !== undefined){
+  return arr.reduce((total, val) => {
+    if (val.children !== undefined) {
       total += val.children.length;
     }
     return total;
@@ -204,9 +205,9 @@ Hint: The accumulator should begin as { count: 0, sum: 0 }
 const calculateAverage = (arr) => {
   // Solution code here...
   let result = 0;
-  if(arr.length > 0){
-    let total = arr.reduce((accumulator,item) => accumulator + item);
-    result = total/arr.length;
+  if (arr.length > 0) {
+    let total = arr.reduce((accumulator, item) => accumulator + item);
+    result = total / arr.length;
   }
   return result;
 };
@@ -228,7 +229,7 @@ const isPrime = (value) => {
   return value > 1;
 };
 
-const countPrimeNumbers = (arr) => arr.reduce((count, value) => isPrime(value) ? count + 1 : count,0);
+const countPrimeNumbers = (arr) => arr.reduce((count, value) => isPrime(value) ? count + 1 : count, 0);
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 10 - Stretch Goal
@@ -271,13 +272,13 @@ const snorlaxData = {
 
 const extractStat = (statName, arr) => {
   // Solution code here...
-  let holder = (arr.reduce(() => {
+  let holder = (arr.reduce((val) => {
     let result = null;
-    if(val !== null && val.stat.name === statName){
+    if (val !== null && val.stat.name === statName) {
       result = val;
     }
     return result;
-  },null));
+  }));
 
   return holder;
 };
@@ -294,6 +295,16 @@ Write a function named extractChildren that, given the array of characters from 
 
 const extractChildren = (arr) => {
   // Solution code here...
+  let filtered = arr.filter((val) => {
+    return val.name.split('').includes('a');
+  });
+  let result = filtered.reduce((anArray, current) => {
+    if (current !== undefined && current.children !== undefined) {
+      anArray.push(...current.children);
+    }
+    return anArray;
+  }, []);
+  return result;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -326,7 +337,7 @@ describe('Testing challenge 2', () => {
 
 describe('Testing challenge 3', () => {
   test('It should add the purchase price', () => {
-    expect(addPurchases([{item: 'switch', purchasePrice: 399}, {item: 'toothpaste', purchasePrice: 2}])).toStrictEqual(401);
+    expect(addPurchases([{ item: 'switch', purchasePrice: 399 }, { item: 'toothpaste', purchasePrice: 2 }])).toStrictEqual(401);
     expect(addPurchases([])).toStrictEqual(0);
   });
 });
@@ -339,7 +350,7 @@ describe('Testing challenge 4', () => {
 
 describe('Testing challenge 5', () => {
   test('It should return an array continaing the names of the characters', () => {
-    expect(returnNames(starWarsData)).toStrictEqual([ 'Luke Skywalker', 'C-3PO', 'R2-D2', 'Darth Vader', 'Leia Organa' ]);
+    expect(returnNames(starWarsData)).toStrictEqual(['Luke Skywalker', 'C-3PO', 'R2-D2', 'Darth Vader', 'Leia Organa']);
     expect(returnNames(starWarsData).length).toStrictEqual(5);
   });
 });
@@ -358,7 +369,7 @@ describe('Testing challenge 7', () => {
 
 describe('Testing challenge 8', () => {
   test('It should return the average of the numbers in the array', () => {
-    expect(calculateAverage([18, 290, 37, 4, 55, 16, 7, 85 ])).toStrictEqual(64);
+    expect(calculateAverage([18, 290, 37, 4, 55, 16, 7, 85])).toStrictEqual(64);
   });
 });
 
@@ -368,15 +379,15 @@ describe('Testing challenge 9', () => {
   });
 });
 
-xdescribe('Testing challenge 10', () => {
+describe('Testing challenge 10', () => {
   test('It should return any stats that match the input', () => {
     expect(extractStat('speed', snorlaxData.stats)).toStrictEqual({ stat: { url: 'https://pokeapi.co/api/v2/stat/6/', name: 'speed' }, effort: 5, baseStat: 30 });
   });
 });
 
-xdescribe('Testing challenge 11', () => {
+describe('Testing challenge 11', () => {
   test('It should return an array containing the names of the children', () => {
-    expect(extractChildren(characters)).toStrictEqual([ 'Robb', 'Sansa', 'Arya', 'Bran', 'Rickon', 'Drogon', 'Rhaegal', 'Viserion', 'Margaery', 'Loras' ]);
+    expect(extractChildren(characters)).toStrictEqual(['Robb', 'Sansa', 'Arya', 'Bran', 'Rickon', 'Drogon', 'Rhaegal', 'Viserion', 'Margaery', 'Loras']);
     expect(extractChildren(characters).length).toStrictEqual(10);
   });
 });
