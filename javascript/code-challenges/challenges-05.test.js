@@ -295,16 +295,11 @@ Write a function named extractChildren that, given the array of characters from 
 
 const extractChildren = (arr) => {
   // Solution code here...
-  let filtered = arr.filter((val) => {
-    return val.name.split('').includes('a');
-  });
-  let result = filtered.reduce((anArray, current) => {
-    if (current !== undefined && current.children !== undefined) {
-      anArray.push(...current.children);
-    }
+  let filtered = arr.filter((val) => (val.name.split('').includes('a') && val.children !== undefined)).reduce((anArray, current) => {
+    anArray.push(...current.children);
     return anArray;
   }, []);
-  return result;
+  return filtered;
 };
 
 /* ------------------------------------------------------------------------------------------------
