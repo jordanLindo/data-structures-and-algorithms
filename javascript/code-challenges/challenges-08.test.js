@@ -52,20 +52,18 @@ let characters = [
   }
 ];
 
-const sortByChildren = (charArray) => {
-  // Solution code here...
-};
+const sortByChildren = (charArray) => charArray.sort((val1, val2) => {
+  return val1.children.length < val2.children.length ? -1 : val1.children.length > val2.children.length ? 1 : val1.house < val2.house ? -1 : val1.house > val2.house ? 1 : 0;
+});
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
 
-Write a function named containsW that takes in a string. This function should use a regular expression pattern to return true if the string contains the letter 'w' in lower case or false if it does not. 
+Write a function named containsW that takes in a string. This function should use a regular expression pattern to return true if the string contains the letter 'w' in lower case or false if it does not.
 
 ------------------------------------------------------------------------------------------------ */
 
-const containsW = (str) => {
-  // Solution code here...
-};
+const containsW = (str) => /w/.test(str);
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
@@ -79,9 +77,7 @@ For example:
 'hello world' returns false
 ------------------------------------------------------------------------------------------------ */
 
-const isNum = (input) => {
-  // Solution code here...
-};
+const isNum = (input) => /\d/.test(input);
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -90,9 +86,7 @@ Write a function named containsWorld that takes in a string or number of any len
 
 ------------------------------------------------------------------------------------------------ */
 
-const containsWorld = (input) => {
-  // Solution code here...
-};
+const containsWorld = (input) => /world/.test(input);
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -103,7 +97,8 @@ Return an array containing all the matches.
 ------------------------------------------------------------------------------------------------ */
 
 const isCapitalized = (str) => {
-  // Solution code here...
+  console.log(str.match(/[A-Z]\w*/));
+  return str.match(/[A-Z]\w*/g) || [];
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -112,10 +107,7 @@ CHALLENGE 6
 Write a function named citiesAtoJ that takes in an array of city names and uses a regular expression pattern to return a new array containing any cities that begin with the letters A through J, inclusive.
 ------------------------------------------------------------------------------------------------ */
 
-const citiesAtoJ = (arr) => {
-  // Solution code here...
-};
-
+const citiesAtoJ = (arr) => arr.filter((val) => val.match(/^[A-J]\w+/));
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7 - Stretch Goal
 
@@ -128,9 +120,7 @@ If the user enters any of these four inputs, return true. For any other input, r
 Do not use the vertical bar (pipe) in your pattern.
 ------------------------------------------------------------------------------------------------ */
 
-const matchMonth = (input) => {
-  // Solution code here...
-};
+const matchMonth = (input) => /oct(ober)?/i.test(input); 
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 8 - Stretch Goal
@@ -263,7 +253,7 @@ describe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should match any of the acceptable inputs', () => {
     expect(matchMonth('Oct')).toBeTruthy();
     expect(matchMonth('oct')).toBeTruthy();
@@ -281,7 +271,7 @@ xdescribe('Testing challenge 7', () => {
   });
 });
 
-xdescribe('Testing challenge 8', () => {
+describe('Testing challenge 8', () => {
   const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacinia vel massa sed egestas. Nunc faucibus iaculis elit, a scelerisque enim condimentum sed. Aenean ac scelerisque sem, et pharetra diam.';
 
   test('It should only return words that are immediately followed by a space', () => {
@@ -295,7 +285,7 @@ xdescribe('Testing challenge 8', () => {
   });
 });
 
-xdescribe('Testing challenge 9', () => {
+describe('Testing challenge 9', () => {
   let startString = 'This is a regex challenge. We are trying to create a hangman phrase where all of the vowels are missing!';
 
   test('It should remove the vowels from the hangman string and replace them with underscores', () => {
@@ -308,7 +298,7 @@ xdescribe('Testing challenge 9', () => {
   });
 });
 
-xdescribe('Testing challenge 10', () => {
+describe('Testing challenge 10', () => {
   test('It should return an array of instances of "sells", shells", and "seashells"', () => {
     expect(findShells(seashells)).toStrictEqual(['sells', 'seashells', 'shells', 'sells', 'seashells', 'sells', 'shells', 'sells', 'shells']);
     expect(findShells(seashells).length).toStrictEqual(9);
