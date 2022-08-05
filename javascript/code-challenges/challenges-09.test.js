@@ -8,7 +8,7 @@ using the 'reduce' method.
 
 E.g. [4,2,7,5,9,2] -> 9
 ------------------------------------------------------------------------------------------------ */
-const maxInArray = (arr) => arr.reduce((prev,curr)=> prev >= curr ? prev : curr,0 );
+const maxInArray = (arr) => arr.reduce((prev, curr) => prev >= curr ? prev : curr, 0);
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -17,7 +17,8 @@ Write a function named getCourseKeys that takes in the courseInfo object and ret
 
 For example: (['name', 'duration', 'topics', 'finalExam']).
 ------------------------------------------------------------------------------------------------ */
-const courseInfo = { name: 'Code 301', duration: { dayTrack: '4 weeks', eveningTrack: '8 weeks'},
+const courseInfo = {
+  name: 'Code 301', duration: { dayTrack: '4 weeks', eveningTrack: '8 weeks' },
   topics: ['SMACSS', 'APIs', 'NodeJS', 'SQL', 'jQuery', 'functional programming'],
   finalExam: true
 };
@@ -53,7 +54,7 @@ HR has asked you to change the data to make it easier to print so that it looks 
 
 ------------------------------------------------------------------------------------------------ */
 
-const updateNumbers = (obj) => Object.keys(obj).map((key) => key+': '+obj[key]);
+const updateNumbers = (obj) => Object.keys(obj).map((key) => key + ': ' + obj[key]);
 
 
 
@@ -127,7 +128,7 @@ hasChildrenValues(characters, 'Sansa') will return false
 
 const hasChildrenValues = (arr, character) => {
   let char = arr.filter((val) => Object.values(val).includes(character));
-  if(char[0].children !== undefined){
+  if (char[0].children !== undefined) {
     console.log(char.children);
     return true;
   }
@@ -141,9 +142,7 @@ Write a function named hasChildrenEntries that is similar to your hasChildrenVal
 The input and output of this function are the same as the input and output from challenge 3.
 ------------------------------------------------------------------------------------------------ */
 
-const hasChildrenEntries = (arr, character) => {
-  // Solution code here...
-};
+const hasChildrenEntries = (arr, character) => arr.find((val) => val.name === character);
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 8 - Stretch Goal
@@ -152,7 +151,12 @@ Write a function named totalCharacters that takes in an array and returns the nu
 ------------------------------------------------------------------------------------------------ */
 
 const totalCharacters = (arr) => {
-  // Solution code here...
+  let total = 0;
+  arr.forEach((val) => {
+    total += 1;
+    total += val.children.length;
+  });
+  return total;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -167,7 +171,9 @@ For example: [{ house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, ..
 
 const houseSize = (arr) => {
   const sizes = [];
-  // Solution code here...
+  arr.forEach((val) => {
+    console.log(val.name);
+  });
   return sizes;
 };
 
@@ -261,7 +267,7 @@ describe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   test('It should return true for characters that have children', () => {
     expect(hasChildrenEntries(characters, 'Eddard')).toBeTruthy();
   });
