@@ -97,7 +97,6 @@ Return an array containing all the matches.
 ------------------------------------------------------------------------------------------------ */
 
 const isCapitalized = (str) => {
-  console.log(str.match(/[A-Z]\w*/));
   return str.match(/[A-Z]\w*/g) || [];
 };
 
@@ -120,7 +119,7 @@ If the user enters any of these four inputs, return true. For any other input, r
 Do not use the vertical bar (pipe) in your pattern.
 ------------------------------------------------------------------------------------------------ */
 
-const matchMonth = (input) => /oct(ober)?/i.test(input); 
+const matchMonth = (input) => input.length === 7 ? /([oO]ctober)/.test(input) : input.length === 3 ? /([oO]ct)/.test(input) : false;
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 8 - Stretch Goal
@@ -132,9 +131,7 @@ For example, if given the string "Hello, and have a wonderful day!", the word "H
 The expected output of "Hello, and have a wonderful day!" is ["and ", "have ", "a ", "wonderful "].
 ------------------------------------------------------------------------------------------------ */
 
-const noPunctuation = str => {
-  // Solution code here...
-};
+const noPunctuation = str => str.split(' ').filter((val) => /^[a-zA-Z]*[,.?!;:]$/.test(val) ? false: true).map((val) => val+=' ');
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 9 - Stretch Goal
@@ -148,9 +145,7 @@ The function should return a string containing the consonants in their original 
 For example, 'Welcome to Code 301!' will return 'W_lc_m_ t_ C_d_ 301!'.
 ------------------------------------------------------------------------------------------------ */
 
-let hangman = (str) => {
-  // Solution code here...
-};
+let hangman = (str) => str.replace(/[aeiou]/ig,'_');
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 10 - Stretch Goal
@@ -164,10 +159,7 @@ Hint: All of these words end with the letters "ells".
 
 const seashells = 'She sells seashells by the seashore. The shells she sells are surely seashells. So if she sells shells on the seashore, I\'m sure she sells seashore shells.';
 
-const findShells = (str) => {
-  // Solution code here...
-};
-
+const findShells = (str) => str.split(' ').filter((val) => /\w*ells/.test(val)? true: false).map((filtered) => /^[a-zA-Z]*[,.?!;:]$/.test(filtered) ? filtered.slice(0,filtered.length-1): filtered);
 /* ------------------------------------------------------------------------------------------------
 TESTS
 
