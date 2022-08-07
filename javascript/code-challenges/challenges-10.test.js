@@ -150,7 +150,6 @@ const howManyTreats = (arr) => {
       element.items.forEach((val) => {
         if (val.name === 'Treats') {
           result = val.quantity;
-          console.log(result);
         }
       });
     }
@@ -176,9 +175,7 @@ Here is a sample board:
 The top row of the board is considered row zero and row numbers increase as they go down.
 ------------------------------------------------------------------------------------------------ */
 
-const battleship = (board, row, col) => {
-  //  Solution code here...
-};
+const battleship = (board, row, col) => board[row][col] === '#' ? 'hit' : 'miss';
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 8 - Stretch Goal
@@ -189,7 +186,17 @@ For example, the following input returns a product of 720: [[1,2], [3,4], [5,6]]
 ------------------------------------------------------------------------------------------------ */
 
 const calculateProduct = (numbers) => {
-  // Solution code here...
+  let total = 1;
+  for (let outer = 0; outer < numbers.length; outer++) {
+    const element = numbers[outer];
+    let innerTotal = 1;
+    for (let inner = 0; inner < element.length; inner++) {
+      const innerElement = element[inner];
+      innerTotal *= innerElement;
+    }
+    total *= innerTotal;
+  }
+  return total;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -209,7 +216,17 @@ const weeklyTemperatures = [
 ];
 
 const averageDailyTemperature = (weather) => {
-  // Solution code here...
+  let sum = 0;
+  let count = 0;
+  for (let outer = 0; outer < weather.length; outer++) {
+    const element = weather[outer];
+    for (let inner = 0; inner < element.length; inner++) {
+      const innerElement = element[inner];
+      sum += innerElement;
+      count++;
+    }
+  }
+  return (sum/count);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -230,7 +247,24 @@ let lowestWeeklyTemperatureData = [
 ];
 
 const lowestWeeklyAverage = (weather) => {
-  // Solution code here...
+  let first = true;
+  let lowest = 0;
+  for (let outer = 0; outer < weather.length; outer++) {
+    const element = weather[outer];
+    let weeklyTotal = 0;
+    for (let inner = 0; inner < element.length; inner++) {
+      const innerElement = element[inner];
+      weeklyTotal += innerElement;
+    }
+    let weeklyAvg = (weeklyTotal/element.length);
+    if(first){
+      first = false;
+      lowest = weeklyAvg;
+    } else if(weeklyAvg < lowest){
+      lowest = weeklyAvg;
+    }
+  }
+  return lowest;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -246,7 +280,19 @@ For example, excel('1,1,1\n4,4,4\n9,9,9') returns [3, 12, 27].
 ------------------------------------------------------------------------------------------------ */
 
 const excel = (str) => {
-  // Solution code here...
+  let result = [];
+  let rows = str.split('\n');
+  for (let outer = 0; outer < rows.length; outer++) {
+    const element = rows[outer];
+    let innerElements = element.split(',');
+    let rowTotal = 0;
+    for (let inner = 0; inner < innerElements.length; inner++) {
+      const innerElement = innerElements[inner];
+      rowTotal += parseInt(innerElement);
+    }
+    result.push(rowTotal);
+  }
+  return result;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -313,7 +359,7 @@ describe('Testing challenge 6', () => {
   });
 });
 
-xdescribe('Testing challenge 7', () => {
+describe('Testing challenge 7', () => {
   const battleshipData = [
     ['#', ' ', '#', ' '],
     ['#', ' ', '#', ' '],
@@ -332,7 +378,7 @@ xdescribe('Testing challenge 7', () => {
   });
 });
 
-xdescribe('Testing challenge 8', () => {
+describe('Testing challenge 8', () => {
   test('It should multiply all the numbers together', () => {
     expect(calculateProduct([[1, 2], [3, 4], [5, 6]])).toStrictEqual(720);
   });
@@ -345,20 +391,20 @@ xdescribe('Testing challenge 8', () => {
   });
 });
 
-xdescribe('Testing challenge 9', () => {
+describe('Testing challenge 9', () => {
   test('It should calculate and return the average temperature of the data set', () => {
     expect(averageDailyTemperature(weeklyTemperatures)).toStrictEqual(60.25);
   });
 });
 
-xdescribe('Testing challenge 10', () => {
+describe('Testing challenge 10', () => {
   test('It should return the lowest weekly average temperature within the data set', () => {
     expect(lowestWeeklyAverage(weeklyTemperatures)).toStrictEqual(57);
     expect(lowestWeeklyAverage(lowestWeeklyTemperatureData)).toStrictEqual(46);
   });
 });
 
-xdescribe('Testing challenge 11', () => {
+describe('Testing challenge 11', () => {
   test('It should return the total count for each row', () => {
     let result = excel('1,1,1\n4,4,4\n9,9,9');
     expect(result.length).toStrictEqual(3);
