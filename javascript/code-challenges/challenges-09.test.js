@@ -154,7 +154,13 @@ const totalCharacters = (arr) => {
   let total = 0;
   arr.forEach((val) => {
     total += 1;
-    total += val.children.length;
+    if (Object.keys(val).includes('children')) {
+      total += val.children.length;
+    }
+    if (Object.keys(val).includes('spouse') && val.spouse !== null) {
+      total += 1;
+    }
+
   });
   return total;
 };
@@ -169,13 +175,19 @@ All of these objects should be added to an array named "sizes". Return the "size
 For example: [{ house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, ... ].
 ------------------------------------------------------------------------------------------------ */
 
-const houseSize = (arr) => {
-  const sizes = [];
-  arr.forEach((val) => {
-    console.log(val.name);
-  });
-  return sizes;
-};
+const houseSize = (arr) => arr.map((val) => {
+  let members = (val) => {
+    let total = 1;
+    if (Object.keys(val).includes('children')) {
+      total += val.children.length;
+    }
+    if (Object.keys(val).includes('spouse') && val.spouse !== null) {
+      total += 1;
+    }
+    return total;
+  };
+  return { house: val.house, 'members': members(val) };
+});
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 10 - Stretch Goal
@@ -195,11 +207,19 @@ For example: [ { house: 'Stark', members: 6 }, { house: 'Arryn', members: 2 }, .
 
 const deceasedSpouses = ['Catelyn', 'Lysa', 'Robert', 'Khal Drogo', 'Alerie'];
 
-const houseSurvivors = (arr) => {
-  const survivors = [];
-  // Solution code here...
-  return survivors;
-};
+const houseSurvivors = (arr) => arr.map((val) => {
+  let membersLeft = (val) => {
+    let total = 1;
+    if (Object.keys(val).includes('children')) {
+      total += val.children.length;
+    }
+    if (Object.keys(val).includes('spouse') && val.spouse !== null && !deceasedSpouses.includes(val.spouse)) {
+      total += 1;
+    }
+    return total;
+  };
+  return { house: val.house, 'members': membersLeft(val) };
+});
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
@@ -277,20 +297,20 @@ describe('Testing challenge 7', () => {
   });
 });
 
-xdescribe('Testing challenge 8', () => {
+describe('Testing challenge 8', () => {
   test('It should return the number of characters in the array', () => {
     expect(totalCharacters(characters)).toStrictEqual(27);
   });
 });
 
-xdescribe('Testing challenge 9', () => {
+describe('Testing challenge 9', () => {
   test('It should return an object for each house containing the name and size', () => {
     expect(houseSize(characters)[1]).toStrictEqual({ house: 'Arryn', members: 3 });
     expect(houseSize(characters).length).toStrictEqual(7);
   });
 });
 
-xdescribe('Testing challenge 10', () => {
+describe('Testing challenge 10', () => {
   test('It should not include any deceased spouses', () => {
     expect(houseSurvivors(characters)[2]).toStrictEqual({ house: 'Lannister', members: 4 });
   });
