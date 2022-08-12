@@ -10,9 +10,7 @@ Write a function named screenForNames that takes in an array of strings and uses
 
 ------------------------------------------------------------------------------------------------ */
 
-const screenForNames = (arr) => {
-  // Solution code here...
-}
+const screenForNames = (arr) => arr.filter(val => (/(^Mr\. |^Mrs\. |^Dr\. |^Ms\. )([A-Z]{1}[a-zA-Z]+$)/g).test(val));
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -22,9 +20,7 @@ Write a function named toTitleCase that takes in an array of strings and returns
 For example, ['apple', 'banana', 'MacGyver'] returns ['Apple', 'Banana', 'MacGyver'].
 ------------------------------------------------------------------------------------------------ */
 
-const toTitleCase = (arr) => {
-  // Solution code here...
-};
+const toTitleCase = (arr) => arr.map(val => val.charAt(0).toUpperCase()+val.slice(1));
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
@@ -98,7 +94,8 @@ let starWarsData = [{
 }];
 
 let biggerThanLuke = (arr) => {
-  // Solution code here...
+  let lukeMass = starWarsData[0].mass;
+  return arr.reduce((prev, curr) => prev === '' ? parseInt(curr.mass) > parseInt(lukeMass) ? curr.name : prev : parseInt(curr.mass) > parseInt(lukeMass) ? prev+' - '+curr.name : prev, '');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -116,11 +113,12 @@ This data could be sorted by name or price.
 ------------------------------------------------------------------------------------------------ */
 
 const sortBy = (property, arr) => {
-  // Solution code here...
+  console.log(property);
+  return arr.sort((a,b) => a[property] > b[property] ? 1 : -1);
 };
 
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 5 
+CHALLENGE 5
 
 Write a function that determines if a given URL is secure, beginning with https://
 
@@ -131,12 +129,10 @@ http://www.insecure.com returns false because the URL is not secure
 https://secure.com returns true because the URL is secure
 https:/missingslash.org returns false because the URL is malformed
 ------------------------------------------------------------------------------------------------ */
-const isSecure = (url) => {
-  // Solution code here...
-};
+const isSecure = (url) => /^(https:\/\/)/.test(url);
 
 /* ------------------------------------------------------------------------------------------------
-CHALLENGE 6 
+CHALLENGE 6
 
 Write a function named detectTicTacToeWin that accepts a two-dimensional array of strings. Each string is guaranteed to be either "X", "O" or an empty string. Your function should check to see if any row, column, or either diagonal direction has three matching "X" or "O" symbols (non-empty strings), three-in-a-line.
 
@@ -155,9 +151,41 @@ Here is a sample board:
 ------------------------------------------------------------------------------------------------ */
 
 const detectTicTacToeWin = (board) => {
-  // Solution code here...
+  let result = '';
+  if(result === ''){
+    result = check(board[0][0],board[0][1],board[0][2]);
+  }
+  if(result === ''){
+    result = check(board[1][0],board[1][1],board[1][2]);
+  }
+  if(result === ''){
+    result = check(board[2][0],board[2][1],board[2][2]);
+  }
+  if(result === ''){
+    result = check(board[0][0],board[1][0],board[2][0]);
+  }
+  if(result === ''){
+    result = check(board[0][1],board[1][1],board[2][1]);
+  }
+  if(result === ''){
+    result = check(board[0][2],board[1][2],board[2][2]);
+  }
+  if(result === ''){
+    result = check(board[0][0],board[1][1],board[2][2]);
+  }
+  if(result === ''){
+    result = check(board[0][2],board[1][1],board[2][0]);
+  }
+  return result === 'X' ? true : result ==='O' ? true : false;
 };
 
+const check = (val1, val2, val3) => {
+  let result = '';
+  if(val1 === val2 && val2 === val3){
+    result = val1;
+  }
+  return result;
+};
 /* ------------------------------------------------------------------------------------------------
 TESTS
 
